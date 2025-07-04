@@ -56,6 +56,11 @@ export default function Header({ onSearch, onReset }: HeaderProps) {
               Events
             </a>
           </li>
+          <li className="mx-2">
+            <a href="#social-feed" className="text-gray-800 font-bold hover:text-blue-600 no-underline">
+              Social Feed
+            </a>
+          </li>
         </ul>
       </nav>
 

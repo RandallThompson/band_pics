@@ -17,6 +17,7 @@ describe('Header Component', () => {
     expect(screen.getByText('Jazz')).toBeInTheDocument();
     expect(screen.getByText('Pop')).toBeInTheDocument();
     expect(screen.getByText('Events')).toBeInTheDocument();
+    expect(screen.getByText('Social Feed')).toBeInTheDocument();
   });
 
   it('renders search input and buttons', () => {

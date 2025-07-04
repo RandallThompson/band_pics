@@ -10,6 +10,7 @@ describe('Home Page', () => {
     expect(screen.getByText('Jazz Bands')).toBeInTheDocument();
     expect(screen.getByText('Pop Bands')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Events' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Buffalo Music Venue Social Feed' })).toBeInTheDocument();
     expect(screen.getByText('© 2025 Band Pics. All rights reserved.')).toBeInTheDocument();
   });
 
