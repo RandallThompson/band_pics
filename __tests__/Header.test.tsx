@@ -12,17 +12,18 @@ describe('Header Component', () => {
   it('renders the header with title and navigation', () => {
     render(<Header onSearch={mockOnSearch} onReset={mockOnReset} />);
     
-    expect(screen.getByText('Band Pics')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Band Pics' })).toBeInTheDocument();
     expect(screen.getByText('Rock')).toBeInTheDocument();
     expect(screen.getByText('Jazz')).toBeInTheDocument();
     expect(screen.getByText('Pop')).toBeInTheDocument();
     expect(screen.getByText('Events')).toBeInTheDocument();
+    expect(screen.getByText('Recent Concerts')).toBeInTheDocument();
   });
 
   it('renders search input and buttons', () => {
     render(<Header onSearch={mockOnSearch} onReset={mockOnReset} />);
     
-    expect(screen.getByPlaceholderText('Search for bands or events...')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Search for artists, concerts, venues...')).toBeInTheDocument();
     expect(screen.getByText('Search')).toBeInTheDocument();
     expect(screen.getByText('Reset')).toBeInTheDocument();
   });
@@ -30,7 +31,7 @@ describe('Header Component', () => {
   it('calls onSearch when search button is clicked with valid input', () => {
     render(<Header onSearch={mockOnSearch} onReset={mockOnReset} />);
     
-    const input = screen.getByPlaceholderText('Search for bands or events...');
+    const input = screen.getByPlaceholderText('Search for artists, concerts, venues...');
     const searchButton = screen.getByText('Search');
     
     fireEvent.change(input, { target: { value: 'rock band' } });
@@ -57,7 +58,7 @@ describe('Header Component', () => {
   it('calls onSearch when Enter key is pressed', () => {
     render(<Header onSearch={mockOnSearch} onReset={mockOnReset} />);
     
-    const input = screen.getByPlaceholderText('Search for bands or events...');
+    const input = screen.getByPlaceholderText('Search for artists, concerts, venues...');
     
     fireEvent.change(input, { target: { value: 'jazz' } });
     fireEvent.keyPress(input, { key: 'Enter', charCode: 13 });
@@ -77,12 +78,22 @@ describe('Header Component', () => {
   it('clears input after search', () => {
     render(<Header onSearch={mockOnSearch} onReset={mockOnReset} />);
     
-    const input = screen.getByPlaceholderText('Search for bands or events...') as HTMLInputElement;
+    const input = screen.getByPlaceholderText('Search for artists, concerts, venues...') as HTMLInputElement;
     const searchButton = screen.getByText('Search');
     
     fireEvent.change(input, { target: { value: 'test search' } });
     fireEvent.click(searchButton);
     
     expect(input.value).toBe('');
+  });
+  
+  it('renders Bandsintown-like UI elements', () => {
+    render(<Header onSearch={mockOnSearch} onReset={mockOnReset} />);
+    
+    expect(screen.getByText('Sign Up')).toBeInTheDocument();
+    expect(screen.getByText('Log In')).toBeInTheDocument();
+    expect(screen.getByText('Discover Live Music Near You')).toBeInTheDocument();
+    expect(screen.getByText('Track your favorite artists and never miss a show')).toBeInTheDocument();
+    expect(screen.getByText('Find Concerts')).toBeInTheDocument();
   });
 });

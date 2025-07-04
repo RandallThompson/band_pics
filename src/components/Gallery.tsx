@@ -25,20 +25,27 @@ export default function Gallery({ title, id, images, searchTerm }: GalleryProps)
     : images;
 
   return (
-    <section id={id} className="mb-8 p-5 bg-gray-50 rounded-md">
-      <h2 className="mb-4 pb-2 border-b border-gray-300 text-xl font-semibold">
-        {title}
-      </h2>
+    <section id={id} className="mb-12 p-6 bg-white rounded-md shadow-sm">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">
+          {title}
+        </h2>
+        {id !== 'recent-concerts' && (
+          <a href={`#${id}`} className="text-pink-600 hover:text-pink-700 font-medium">
+            View All {title}
+          </a>
+        )}
+      </div>
       
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredImages.length > 0 ? (
           filteredImages.map((image) => (
             <div 
               key={image.id} 
-              className="flex flex-col items-center mb-4"
+              className="flex flex-col bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
               style={{ display: searchTerm && !filteredImages.includes(image) ? 'none' : 'flex' }}
             >
-              <div className="relative w-full h-48 overflow-hidden rounded-md">
+              <div className="relative w-full h-48 overflow-hidden">
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -47,9 +54,25 @@ export default function Gallery({ title, id, images, searchTerm }: GalleryProps)
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
-              <p className="mt-2 text-sm text-center font-bold">
-                {image.caption}
-              </p>
+              <div className="p-4">
+                <p className="text-lg font-bold text-gray-800 mb-1">
+                  {image.caption}
+                </p>
+                {id === 'recent-concerts' && (
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-600">July 3, 2025</p>
+                    <div className="flex items-center mt-2">
+                      <span className="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full mr-2">Fan Favorite</span>
+                      <span className="text-xs text-gray-500">42 contributions</span>
+                    </div>
+                  </div>
+                )}
+                {id !== 'recent-concerts' && (
+                  <button className="mt-3 w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 transition-colors">
+                    View Details
+                  </button>
+                )}
+              </div>
             </div>
           ))
         ) : (
