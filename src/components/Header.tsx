@@ -79,6 +79,11 @@ export default function Header({ onSearch, onReset }: HeaderProps) {
                   Recent Concerts
                 </a>
               </li>
+              <li>
+                <a href="#social-feed" className="text-white font-medium hover:text-pink-500 transition-colors no-underline">
+                  Social Feed
+                </a>
+              </li>
             </ul>
           </nav>
 

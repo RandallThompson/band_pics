@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import Gallery from '@/components/Gallery';
 import Footer from '@/components/Footer';
+import SocialFeed from '@/components/SocialFeed';
 import UpcomingEvents from '@/components/UpcomingEvents';
 import { useImages } from '@/hooks/useImages';
 
@@ -147,6 +148,9 @@ export default function Home() {
           images={images.events} 
           searchTerm={searchTerm}
         />
+        
+        {/* Social Media Feed Section */}
+        <SocialFeed />
       </main>
 
       <Footer />
