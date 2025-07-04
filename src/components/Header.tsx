@@ -31,55 +31,83 @@ export default function Header({ onSearch, onReset }: HeaderProps) {
   };
 
   return (
-    <header className="bg-gray-100 p-5 mb-5 rounded-md">
-      <h1 className="mb-4 text-center text-2xl font-bold">Band Pics</h1>
-      
-      <nav className="mb-4">
-        <ul className="flex justify-center list-none">
-          <li className="mx-2">
-            <a href="#rock" className="text-gray-800 font-bold hover:text-blue-600 no-underline">
-              Rock
+    <header className="bg-black text-white p-5 mb-5">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-pink-500">Band Pics</h1>
+          
+          <div className="flex items-center space-x-4">
+            <a href="#" className="text-white hover:text-pink-500 transition-colors">
+              Sign Up
             </a>
-          </li>
-          <li className="mx-2">
-            <a href="#jazz" className="text-gray-800 font-bold hover:text-blue-600 no-underline">
-              Jazz
+            <a href="#" className="text-white hover:text-pink-500 transition-colors">
+              Log In
             </a>
-          </li>
-          <li className="mx-2">
-            <a href="#pop" className="text-gray-800 font-bold hover:text-blue-600 no-underline">
-              Pop
-            </a>
-          </li>
-          <li className="mx-2">
-            <a href="#events" className="text-gray-800 font-bold hover:text-blue-600 no-underline">
-              Events
-            </a>
-          </li>
-        </ul>
-      </nav>
+          </div>
+        </div>
+        
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+          <nav className="mb-4 md:mb-0">
+            <ul className="flex space-x-6 list-none">
+              <li>
+                <a href="#rock" className="text-white font-medium hover:text-pink-500 transition-colors no-underline">
+                  Rock
+                </a>
+              </li>
+              <li>
+                <a href="#jazz" className="text-white font-medium hover:text-pink-500 transition-colors no-underline">
+                  Jazz
+                </a>
+              </li>
+              <li>
+                <a href="#pop" className="text-white font-medium hover:text-pink-500 transition-colors no-underline">
+                  Pop
+                </a>
+              </li>
+              <li>
+                <a href="#events" className="text-white font-medium hover:text-pink-500 transition-colors no-underline">
+                  Events
+                </a>
+              </li>
+              <li>
+                <a href="#recent-concerts" className="text-white font-medium hover:text-pink-500 transition-colors no-underline">
+                  Recent Concerts
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-      <div className="flex justify-center mb-2">
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Search for bands or events..."
-          className="p-2 w-80 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <button
-          onClick={handleSearch}
-          className="px-4 py-2 bg-blue-600 text-white border-none rounded-r-md cursor-pointer hover:bg-blue-700"
-        >
-          Search
-        </button>
-        <button
-          onClick={handleReset}
-          className="px-4 py-2 bg-gray-600 text-white border-none rounded-md cursor-pointer ml-1 hover:bg-gray-700"
-        >
-          Reset
-        </button>
+          <div className="flex w-full md:w-auto">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Search for artists, concerts, venues..."
+              className="p-3 w-full md:w-80 bg-gray-800 text-white border border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            />
+            <button
+              onClick={handleSearch}
+              className="px-4 py-3 bg-pink-600 text-white border-none rounded-r-md cursor-pointer hover:bg-pink-700 transition-colors"
+            >
+              Search
+            </button>
+            <button
+              onClick={handleReset}
+              className="px-4 py-3 bg-gray-700 text-white border-none rounded-md cursor-pointer ml-2 hover:bg-gray-600 transition-colors"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+        
+        <div className="bg-gradient-to-r from-pink-600 to-purple-600 p-8 rounded-lg text-center">
+          <h2 className="text-2xl font-bold mb-2">Discover Live Music Near You</h2>
+          <p className="text-lg mb-4">Track your favorite artists and never miss a show</p>
+          <button className="bg-white text-pink-600 font-bold py-2 px-6 rounded-full hover:bg-gray-100 transition-colors">
+            Find Concerts
+          </button>
+        </div>
       </div>
     </header>
   );
