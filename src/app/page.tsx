@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Gallery from '@/components/Gallery';
 import Footer from '@/components/Footer';
@@ -26,7 +27,7 @@ export default function Home() {
         {/* Recent Concerts Section */}
         <section id="recent-concerts" className="mb-16">
           <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">Last Night's Concerts</h2>
+            <h2 className="text-3xl font-bold mb-6 text-gray-800">Last Night&apos;s Concerts</h2>
             <p className="text-gray-600 mb-8 max-w-3xl">
               Check out these amazing performances from yesterday. Our community has shared their favorite moments and photos from these unforgettable shows.
             </p>
@@ -35,10 +36,12 @@ export default function Home() {
               {images.events.slice(0, 3).map((image) => (
                 <div key={image.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
                   <div className="relative w-full h-48 overflow-hidden">
-                    <img 
+                    <Image 
                       src={image.src} 
                       alt={`Recent concert: ${image.caption}`}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                       <div className="p-4 text-white">
@@ -55,10 +58,12 @@ export default function Home() {
                     <div className="flex -space-x-2 mb-4">
                       {[1, 2, 3, 4].map((i) => (
                         <div key={i} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-gray-200">
-                          <img 
+                          <Image 
                             src={`https://via.placeholder.com/50?text=Fan${i}`} 
                             alt={`Fan ${i}`}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 20px, 32px"
                           />
                         </div>
                       ))}
@@ -94,10 +99,12 @@ export default function Home() {
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="relative group overflow-hidden rounded-md">
                   <div className="aspect-square bg-gray-200 relative">
-                    <img 
+                    <Image 
                       src={`https://via.placeholder.com/300x300?text=Fan+Photo+${i+1}`} 
                       alt={`Fan contribution ${i+1}`}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <button className="bg-pink-600 text-white py-1 px-3 rounded-full text-sm">
