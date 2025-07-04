@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import Gallery from '@/components/Gallery';
 import Footer from '@/components/Footer';
+import UpcomingEvents from '@/components/UpcomingEvents';
 import { useImages } from '@/hooks/useImages';
 
 export default function Home() {
@@ -24,6 +25,9 @@ export default function Home() {
       <Header onSearch={handleSearch} onReset={handleReset} />
       
       <main className="max-w-6xl mx-auto px-5">
+        {/* New component for upcoming events in Buffalo */}
+        <UpcomingEvents />
+        
         {/* Recent Concerts Section */}
         <section id="recent-concerts" className="mb-16">
           <div className="bg-white p-6 rounded-lg shadow-sm mb-8">

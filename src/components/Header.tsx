@@ -50,6 +50,11 @@ export default function Header({ onSearch, onReset }: HeaderProps) {
           <nav className="mb-4 md:mb-0">
             <ul className="flex space-x-6 list-none">
               <li>
+                <a href="#upcoming-events" className="text-white font-medium hover:text-pink-500 transition-colors no-underline">
+                  Buffalo Events
+                </a>
+              </li>
+              <li>
                 <a href="#rock" className="text-white font-medium hover:text-pink-500 transition-colors no-underline">
                   Rock
                 </a>
