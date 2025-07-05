@@ -32,7 +32,7 @@ export default function PhotoUpload({ token, eventId, genre, onUploadComplete }:
       return;
     }
 
-    await uploadPhoto(file, {
+    const success = await uploadPhoto(file, {
       event_id: eventId,
       caption,
       alt_text: altText,
@@ -41,7 +41,7 @@ export default function PhotoUpload({ token, eventId, genre, onUploadComplete }:
     });
 
     // Reset form after successful upload
-    if (!uploadError) {
+    if (success) {
       setFile(null);
       setCaption('');
       setAltText('');

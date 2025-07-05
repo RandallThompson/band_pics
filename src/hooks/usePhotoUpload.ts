@@ -20,7 +20,7 @@ interface UsePhotoUploadResult {
   isUploading: boolean;
   uploadProgress: number;
   uploadError: string | null;
-  uploadPhoto: (file: File, photoData: Omit<PhotoData, 'blob_url'>) => Promise<void>;
+  uploadPhoto: (file: File, photoData: Omit<PhotoData, 'blob_url'>) => Promise<boolean>;
 }
 
 export function usePhotoUpload(token: string): UsePhotoUploadResult {
@@ -31,7 +31,7 @@ export function usePhotoUpload(token: string): UsePhotoUploadResult {
   const uploadPhoto = async (file: File, photoData: Omit<PhotoData, 'blob_url'>) => {
     if (!token) {
       setUploadError('Authentication required');
-      return;
+      return false;
     }
 
     setIsUploading(true);
@@ -93,8 +93,10 @@ export function usePhotoUpload(token: string): UsePhotoUploadResult {
       }
 
       setUploadProgress(100);
+      return true;
     } catch (error) {
       setUploadError(error instanceof Error ? error.message : 'An unknown error occurred');
+      return false;
     } finally {
       setIsUploading(false);
     }

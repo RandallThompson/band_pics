@@ -54,11 +54,13 @@ describe('usePhotoUpload Hook', () => {
 
     const { result } = renderHook(() => usePhotoUpload(mockToken));
     
+    let success = false;
     await act(async () => {
-      await result.current.uploadPhoto(mockFile, mockPhotoData);
+      success = await result.current.uploadPhoto(mockFile, mockPhotoData);
     });
     
     expect(global.fetch).toHaveBeenCalledTimes(3);
+    expect(success).toBe(true);
     expect(result.current.uploadProgress).toBe(100);
     expect(result.current.isUploading).toBe(false);
     expect(result.current.uploadError).toBeNull();
@@ -75,11 +77,13 @@ describe('usePhotoUpload Hook', () => {
 
     const { result } = renderHook(() => usePhotoUpload(mockToken));
     
+    let success = false;
     await act(async () => {
-      await result.current.uploadPhoto(mockFile, mockPhotoData);
+      success = await result.current.uploadPhoto(mockFile, mockPhotoData);
     });
     
     expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(success).toBe(false);
     expect(result.current.uploadError).toBe('Failed to get upload URL');
     expect(result.current.isUploading).toBe(false);
   });
@@ -102,11 +106,13 @@ describe('usePhotoUpload Hook', () => {
 
     const { result } = renderHook(() => usePhotoUpload(mockToken));
     
+    let success = false;
     await act(async () => {
-      await result.current.uploadPhoto(mockFile, mockPhotoData);
+      success = await result.current.uploadPhoto(mockFile, mockPhotoData);
     });
     
     expect(global.fetch).toHaveBeenCalledTimes(2);
+    expect(success).toBe(false);
     expect(result.current.uploadError).toBe('Failed to upload file');
     expect(result.current.isUploading).toBe(false);
   });
@@ -136,11 +142,13 @@ describe('usePhotoUpload Hook', () => {
 
     const { result } = renderHook(() => usePhotoUpload(mockToken));
     
+    let success = false;
     await act(async () => {
-      await result.current.uploadPhoto(mockFile, mockPhotoData);
+      success = await result.current.uploadPhoto(mockFile, mockPhotoData);
     });
     
     expect(global.fetch).toHaveBeenCalledTimes(3);
+    expect(success).toBe(false);
     expect(result.current.uploadError).toBe('Failed to save photo information');
     expect(result.current.isUploading).toBe(false);
   });
