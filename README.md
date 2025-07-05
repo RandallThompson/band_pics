@@ -1,4 +1,4 @@
-# Band Pics - Next.js Application
+# Buffalo Music Scene - Next.js Application
 
 A modern Next.js web application for organizing and displaying band pictures by genre, optimized for Vercel deployment.
 

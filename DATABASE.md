@@ -1,6 +1,6 @@
 # Database Implementation
 
-This document describes the SQLite database implementation for the Band Pics application.
+This document describes the SQLite database implementation for the Buffalo Music Scene application.
 
 ## Overview
 
