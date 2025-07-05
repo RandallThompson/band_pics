@@ -209,9 +209,12 @@ export default function PastEvents() {
               </p>
               
               <div className="flex space-x-2">
-                <button className="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors">
+                <a 
+                  href={`/events/${event.id}`}
+                  className="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors text-center"
+                >
                   View Gallery
-                </button>
+                </a>
                 <button
                   onClick={() => handleUploadClick(event)}
                   className="flex-1 bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 transition-colors"
