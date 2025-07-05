@@ -1,23 +1,16 @@
+'use client';
+
 import { Suspense } from 'react';
 import { SearchResults } from '@/components/SearchResults';
-import { fetchBandsInTownEvents } from '@/lib/api/bandsintown';
-import { EventDisplay } from '@/lib/types';
+import { useSearchParams } from 'next/navigation';
 
-export const dynamic = 'force-dynamic';
-
-interface SearchPageProps {
-  searchParams: {
-    q?: string;
-    [key: string]: string | string[] | undefined;
-  };
-}
-
-export default function SearchPage({ searchParams }: SearchPageProps) {
-  const query = searchParams.q || '';
+export default function SearchPage() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get('q') || '';
   
   // Initialize with empty values
-  const events: EventDisplay[] = [];
-  const error: string | null = null;
+  const events = [];
+  const error = null;
 
   return (
     <div className="max-w-6xl mx-auto px-5 py-8">
