@@ -25,11 +25,11 @@ html {
 
 /* Goo Goo Dolls inspired styles */
 .btn-primary {
-  @apply bg-accent-600 text-white py-2 px-6 rounded-md hover:bg-accent-700 transition-colors;
+  @apply bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors;
 }
 
 .btn-secondary {
-  @apply bg-primary-800 text-accent-400 py-2 px-6 rounded-full border border-accent-600 hover:bg-primary-700 transition-colors;
+  @apply bg-primary-800 text-blue-400 py-2 px-6 rounded-full border border-blue-600 hover:bg-primary-700 transition-colors;
 }
 
 .card {
@@ -37,7 +37,7 @@ html {
 }
 
 .badge {
-  @apply text-xs bg-accent-900 text-accent-200 px-2 py-1 rounded-full;
+  @apply text-xs bg-blue-900 text-blue-200 px-2 py-1 rounded-full;
 }
 
 /* Gradient overlay for images */

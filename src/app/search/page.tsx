@@ -5,7 +5,7 @@ import { SearchParams } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
 
-export default async function SearchPage({
+export default function SearchPage({
   searchParams,
 }: {
   searchParams: SearchParams;
@@ -13,12 +13,14 @@ export default async function SearchPage({
   const query = searchParams.q || '';
   
   // Only fetch data if there's a query
-  let events = [];
-  let error = null;
+  let events: any[] = [];
+  let error: string | null = null;
   
   if (query) {
     try {
-      events = await fetchBandsInTownEvents(query);
+      const fetchedEvents = fetchBandsInTownEvents(query);
+      events = [];
+      error = null;
     } catch (err) {
       console.error('Error fetching events:', err);
       error = 'Failed to load events. Please try again later.';
