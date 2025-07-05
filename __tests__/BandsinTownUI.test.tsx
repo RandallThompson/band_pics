@@ -41,6 +41,6 @@ describe('Bandsintown UI', () => {
     expect(screen.getByText('Connect')).toBeInTheDocument();
     expect(screen.getByText('Concerts Near Me')).toBeInTheDocument();
     expect(screen.getByText('Fan Photos')).toBeInTheDocument();
-    expect(screen.getByText('Instagram')).toBeInTheDocument();
+    expect(screen.getAllByText('Instagram')).toHaveLength(2); // One in social feed, one in footer
   });
 });
