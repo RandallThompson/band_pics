@@ -1,4 +1,4 @@
-import { db } from '../connection';
+import { getDatabase } from '../connection';
 
 export interface Event {
   id: string;
