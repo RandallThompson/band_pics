@@ -25,25 +25,24 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Get file information from request
-    const { filename, contentType } = await request.json();
+    // For file uploads, we need to handle the actual file data
+    // This endpoint should receive the file data directly
+    const formData = await request.formData();
+    const file = formData.get('file') as File;
     
-    if (!filename || !contentType) {
+    if (!file) {
       return NextResponse.json(
-        { error: 'Filename and content type are required' },
+        { error: 'No file provided' },
         { status: 400 }
       );
     }
     
-    // Generate a unique upload URL
-    const blob = await put(filename, null, {
+    // Upload the file to Vercel Blob
+    const blob = await put(file.name, file, {
       access: 'public',
-      contentType,
-      multipart: true,
     });
     
     return NextResponse.json({
-      uploadUrl: blob.uploadUrl,
       blobUrl: blob.url,
     });
   } catch (error) {
