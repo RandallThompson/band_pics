@@ -13,7 +13,7 @@ describe('Header Component', () => {
   it('renders the header with title and navigation', () => {
     render(<Header onSearch={mockOnSearch} onReset={mockOnReset} onShowPastEvents={mockOnShowPastEvents} />);
     
-    expect(screen.getByRole('heading', { name: 'Band Pics' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Buffalo Music Scene' })).toBeInTheDocument();
     expect(screen.getByText('Buffalo Events')).toBeInTheDocument();
     expect(screen.getByText('Social Feed')).toBeInTheDocument();
     expect(screen.getByText('Recent Concerts')).toBeInTheDocument();

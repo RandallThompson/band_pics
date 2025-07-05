@@ -6,10 +6,10 @@ describe('Home Page', () => {
     render(<Home />);
     
     // Check for main sections
-    expect(screen.getByRole('heading', { level: 1, name: 'Band Pics' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Buffalo Music Scene' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Upcoming Events in Buffalo' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Buffalo Music Venue Social Feed' })).toBeInTheDocument();
-    expect(screen.getByText('© 2025 Band Pics. All rights reserved.')).toBeInTheDocument();
+    expect(screen.getByText("© 2025 Buffalo Music Scene. Celebrating the city's musical legacy.")).toBeInTheDocument();
     
     // Check for new Bandsintown-like sections
     expect(screen.getByText('Last Night\'s Concerts')).toBeInTheDocument();

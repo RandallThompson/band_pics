@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Band Pics",
+  title: "Buffalo Music Scene",
   description: "A repository for storing and organizing band pictures",
 };
 

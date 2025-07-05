@@ -52,7 +52,7 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
     <header className="bg-primary-900/90 backdrop-blur-sm text-white p-5 mb-5 border-b border-primary-700">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-accent-400">Band Pics</h1>
+          <h1 className="text-3xl font-bold text-accent-400">Buffalo Music Scene</h1>
           
           <div className="flex items-center space-x-4">
             <button
