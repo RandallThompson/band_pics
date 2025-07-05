@@ -17,13 +17,17 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
   const router = useRouter();
 
   const handleSearch = () => {
-    if (searchTerm.trim() === '') {
+    const term = searchTerm.trim();
+    if (term === '') {
       alert('Please enter a search term');
       return;
     }
-    
+
+    // Notify parent component of the search
+    onSearch(term.toLowerCase());
+
     // Navigate to the search page with the query parameter
-    router.push(`/search?q=${encodeURIComponent(searchTerm.toLowerCase())}`);
+    router.push(`/search?q=${encodeURIComponent(term.toLowerCase())}`);
     setSearchTerm('');
   };
 
