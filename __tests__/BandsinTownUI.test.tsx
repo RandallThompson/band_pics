@@ -43,4 +43,3 @@ describe('Bandsintown UI', () => {
     expect(screen.getByText('Fan Photos')).toBeInTheDocument();
     expect(screen.getAllByText('Instagram')).toHaveLength(2); // One in social feed, one in footer
   });
-});
