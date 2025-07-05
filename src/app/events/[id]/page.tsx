@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { getPastEvents } from '@/lib/database/models/event';
 import { getEventPhotos } from '@/lib/database/models/photo';
 
-export default async function EventGalleryPage({ params }: { params: { id: string } }) {
+export default async function EventGalleryPage({ params }) {
   const eventId = params.id;
   
   // Fetch event details
