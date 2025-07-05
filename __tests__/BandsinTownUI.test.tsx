@@ -6,7 +6,7 @@ describe('Bandsintown UI', () => {
     render(<Home />);
     
     // Check for the new header elements
-    expect(screen.getByRole('heading', { level: 1, name: 'Buffalo Music Scene' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Band Pics' })).toBeInTheDocument();
     expect(screen.getByText('Sign Up')).toBeInTheDocument();
     expect(screen.getByText('Log In')).toBeInTheDocument();
     expect(screen.getByText('Discover Live Music Near You')).toBeInTheDocument();
