@@ -9,7 +9,7 @@ jest.mock('@/hooks/usePhotoUpload', () => ({
     isUploading: false,
     uploadProgress: 0,
     uploadError: null,
-    uploadPhoto: jest.fn().mockResolvedValue(undefined)
+    uploadPhoto: jest.fn().mockResolvedValue(true)
   }))
 }));
 
@@ -82,7 +82,7 @@ describe('PhotoUpload Component', () => {
       isUploading: false,
       uploadProgress: 0,
       uploadError: 'Failed to upload photo',
-      uploadPhoto: jest.fn().mockResolvedValue(undefined)
+      uploadPhoto: jest.fn().mockResolvedValue(false)
     });
 
     render(
@@ -103,7 +103,7 @@ describe('PhotoUpload Component', () => {
       isUploading: true,
       uploadProgress: 50,
       uploadError: null,
-      uploadPhoto: jest.fn().mockResolvedValue(undefined)
+      uploadPhoto: jest.fn().mockResolvedValue(true)
     });
 
     render(
