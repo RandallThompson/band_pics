@@ -73,7 +73,6 @@ band_pics/
 │       └── useImages.ts        # Custom hook for image management
 ├── __tests__/                  # Test files
 ├── backup/                     # Original static files
-├── public/                     # Static assets
 ├── rock/                       # Rock band pictures
 ├── jazz/                       # Jazz band pictures
 ├── pop/                        # Pop band pictures
@@ -81,13 +80,15 @@ band_pics/
 └── vercel.json                 # Vercel deployment config
 ```
 
+Images are stored directly in the genre folders listed above rather than in a `public/` directory.
+
 ## Adding Pictures
 
 Currently, the application uses placeholder images. To add real pictures:
 
 1. **For Development**: Update the `useImages` hook in `src/hooks/useImages.ts` to load actual image data
 2. **For Production**: Implement an image management system or API
-3. **Static Images**: Place images in the `public` directory and update the image paths
+3. **Static Images**: Place images in the appropriate genre directory (e.g., `rock/`, `jazz/`, `pop/`, or `events/`) and update the image paths. A `public/` folder is not used in this project.
 
 ### Supported Image Formats
 - JPG/JPEG
