@@ -8,12 +8,17 @@ describe('SocialFeed Component', () => {
     expect(screen.getByText('Buffalo Music Venue Social Feed')).toBeInTheDocument();
   });
 
-  it('displays filter buttons for social platforms', async () => {
+  it('displays filter buttons for venues', async () => {
     render(<SocialFeed />);
     
-    expect(screen.getByText('All')).toBeInTheDocument();
-    expect(screen.getByText('Facebook')).toBeInTheDocument();
-    expect(screen.getByText('Instagram')).toBeInTheDocument();
+    // Wait for posts to load so venue buttons are rendered
+    await waitFor(() => {
+      expect(screen.queryByText('Loading social media posts...')).not.toBeInTheDocument();
+    });
+    
+    expect(screen.getByText('All Venues')).toBeInTheDocument();
+    expect(screen.getByText('Buffalo Iron Works')).toBeInTheDocument();
+    expect(screen.getByText('Town Ballroom')).toBeInTheDocument();
   });
 
   // Skip the loading test since the mock data loads immediately in the test environment
@@ -32,11 +37,11 @@ describe('SocialFeed Component', () => {
     });
     
     // Check for post content
-    expect(screen.getByText(/Amazing show tonight at Buffalo Music Hall!/i)).toBeInTheDocument();
-    expect(screen.getByText(/Incredible performance at @BuffaloMusicVenue/i)).toBeInTheDocument();
+    expect(screen.getByText(/Amazing show tonight at Buffalo Iron Works!/i)).toBeInTheDocument();
+    expect(screen.getByText(/Incredible performance at @TownBallroom/i)).toBeInTheDocument();
   });
 
-  it('filters posts when platform buttons are clicked', async () => {
+  it('filters posts when venue buttons are clicked', async () => {
     render(<SocialFeed />);
     
     // Wait for posts to load
@@ -44,25 +49,25 @@ describe('SocialFeed Component', () => {
       expect(screen.queryByText('Loading social media posts...')).not.toBeInTheDocument();
     });
     
-    // Click Facebook filter
-    fireEvent.click(screen.getByText('Facebook'));
+    // Click Buffalo Iron Works filter
+    fireEvent.click(screen.getByText('Buffalo Iron Works'));
     
-    // Should show Facebook posts and hide Instagram posts
-    expect(screen.getByText(/Amazing show tonight at Buffalo Music Hall!/i)).toBeInTheDocument();
-    expect(screen.queryByText(/Incredible performance at @BuffaloMusicVenue/i)).not.toBeInTheDocument();
+    // Should show Buffalo Iron Works posts and hide others
+    expect(screen.getByText(/Amazing show tonight at Buffalo Iron Works!/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Incredible performance at @TownBallroom/i)).not.toBeInTheDocument();
     
-    // Click Instagram filter
-    fireEvent.click(screen.getByText('Instagram'));
+    // Click Town Ballroom filter
+    fireEvent.click(screen.getByText('Town Ballroom'));
     
-    // Should show Instagram posts and hide Facebook posts
-    expect(screen.queryByText(/Amazing show tonight at Buffalo Music Hall!/i)).not.toBeInTheDocument();
-    expect(screen.getByText(/Incredible performance at @BuffaloMusicVenue/i)).toBeInTheDocument();
+    // Should show Town Ballroom posts and hide others
+    expect(screen.queryByText(/Amazing show tonight at Buffalo Iron Works!/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/Incredible performance at @TownBallroom/i)).toBeInTheDocument();
     
-    // Click All filter
-    fireEvent.click(screen.getByText('All'));
+    // Click All Venues filter
+    fireEvent.click(screen.getByText('All Venues'));
     
     // Should show all posts again
-    expect(screen.getByText(/Amazing show tonight at Buffalo Music Hall!/i)).toBeInTheDocument();
-    expect(screen.getByText(/Incredible performance at @BuffaloMusicVenue/i)).toBeInTheDocument();
+    expect(screen.getByText(/Amazing show tonight at Buffalo Iron Works!/i)).toBeInTheDocument();
+    expect(screen.getByText(/Incredible performance at @TownBallroom/i)).toBeInTheDocument();
   });
 });

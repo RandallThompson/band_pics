@@ -7,10 +7,7 @@ describe('Home Page', () => {
     
     // Check for main sections
     expect(screen.getByRole('heading', { level: 1, name: 'Band Pics' })).toBeInTheDocument();
-    expect(screen.getByText('Rock Bands')).toBeInTheDocument();
-    expect(screen.getByText('Jazz Bands')).toBeInTheDocument();
-    expect(screen.getByText('Pop Bands')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Events' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Upcoming Events in Buffalo' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Buffalo Music Venue Social Feed' })).toBeInTheDocument();
     expect(screen.getByText('© 2025 Band Pics. All rights reserved.')).toBeInTheDocument();
     
@@ -19,15 +16,15 @@ describe('Home Page', () => {
     expect(screen.getByText('Top Fan Contributions')).toBeInTheDocument();
   });
 
-  it('displays placeholder images from all genres', async () => {
+  it('displays upcoming events', async () => {
     render(<Home />);
     
-    // Wait for the useEffect to load the images
+    // Wait for the useEffect to load the events
     await waitFor(() => {
-      expect(screen.getByText('Rock Band 1')).toBeInTheDocument();
-      expect(screen.getByText('Jazz Band 1')).toBeInTheDocument();
-      expect(screen.getByText('Pop Band 1')).toBeInTheDocument();
-      expect(screen.getByText('Events Band 1')).toBeInTheDocument();
+      // Check for venue events (using getAllByText since venues appear multiple times)
+      expect(screen.getAllByText('Buffalo Iron Works').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('Town Ballroom').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('Mohawk Place').length).toBeGreaterThan(0);
     });
   });
 
