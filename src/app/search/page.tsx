@@ -1,8 +1,13 @@
-import { Suspense } from 'react';
 import { SearchResults } from '@/components/SearchResults';
 
-export default function SearchPage({ searchParams }: { searchParams: { q?: string } }) {
-  const query = searchParams.q || '';
+export const dynamic = 'force-dynamic';
+
+export default function SearchPage({
+  searchParams,
+}: {
+  searchParams: Record<string, string | string[] | undefined>;
+}) {
+  const query = typeof searchParams.q === 'string' ? searchParams.q : '';
   
   // Initialize with empty values
   const events: any[] = [];
@@ -14,9 +19,7 @@ export default function SearchPage({ searchParams }: { searchParams: { q?: strin
         {query ? `Search Results for "${query}"` : 'Search for Events'}
       </h1>
       
-      <Suspense fallback={<div className="text-center py-8">Loading results...</div>}>
-        <SearchResults query={query} events={events} error={error} />
-      </Suspense>
+      <SearchResults query={query} events={events} error={error} />
     </div>
   );
 }
