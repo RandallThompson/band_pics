@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import AuthModal from './AuthModal';
 
@@ -47,21 +48,27 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
     <header className="bg-primary-900/90 backdrop-blur-sm text-white p-5 mb-5 border-b border-primary-700">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-accent-400">Buffalo Music Scene</h1>
+          <h1 className="text-3xl font-bold text-accent-400">Band Pics</h1>
           
           <div className="flex items-center space-x-4">
-            <button 
+            <button
               onClick={() => handleAuthClick('signup')}
               className="text-primary-200 hover:text-accent-400 transition-colors"
             >
               Sign Up
             </button>
-            <button 
+            <button
               onClick={() => handleAuthClick('login')}
               className="text-primary-200 hover:text-accent-400 transition-colors"
             >
               Log In
             </button>
+            <Link
+              href="/profile"
+              className="text-primary-200 hover:text-accent-400 transition-colors"
+            >
+              Profile
+            </Link>
           </div>
         </div>
         
@@ -134,10 +141,10 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
         </div>
         
         <div className="bg-gradient-to-r from-accent-800 to-primary-800 p-8 rounded-lg text-center border border-primary-600">
-          <h2 className="text-2xl font-bold mb-2 text-primary-100">Discover Buffalo&apos;s Music Scene</h2>
-          <p className="text-lg mb-4 text-primary-200">From the Goo Goo Dolls to local venues - explore the city&apos;s rich musical heritage</p>
+          <h2 className="text-2xl font-bold mb-2 text-primary-100">Discover Live Music Near You</h2>
+          <p className="text-lg mb-4 text-primary-200">Track your favorite artists and never miss a show</p>
           <button className="bg-blue-500 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition-colors">
-            Explore Buffalo Music
+            Find Concerts
           </button>
         </div>
       </div>
