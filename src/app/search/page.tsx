@@ -1,31 +1,23 @@
 import { Suspense } from 'react';
 import { SearchResults } from '@/components/SearchResults';
 import { fetchBandsInTownEvents } from '@/lib/api/bandsintown';
-import { SearchParams } from '@/lib/types';
+import { EventDisplay } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
 
-export default function SearchPage({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}) {
+interface SearchPageProps {
+  searchParams: {
+    q?: string;
+    [key: string]: string | string[] | undefined;
+  };
+}
+
+export default function SearchPage({ searchParams }: SearchPageProps) {
   const query = searchParams.q || '';
   
-  // Only fetch data if there's a query
-  let events: any[] = [];
-  let error: string | null = null;
-  
-  if (query) {
-    try {
-      const fetchedEvents = fetchBandsInTownEvents(query);
-      events = [];
-      error = null;
-    } catch (err) {
-      console.error('Error fetching events:', err);
-      error = 'Failed to load events. Please try again later.';
-    }
-  }
+  // Initialize with empty values
+  const events: EventDisplay[] = [];
+  const error: string | null = null;
 
   return (
     <div className="max-w-6xl mx-auto px-5 py-8">
