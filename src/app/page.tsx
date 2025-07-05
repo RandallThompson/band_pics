@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   return (
-    <div className="font-sans leading-relaxed text-gray-800 bg-gray-50">
+    <div className="font-sans leading-relaxed text-primary-100 min-h-screen">
       <Header onSearch={handleSearch} onReset={handleReset} />
       
       <main className="max-w-6xl mx-auto px-5">
@@ -31,15 +31,15 @@ export default function Home() {
         
         {/* Recent Concerts Section */}
         <section id="recent-concerts" className="mb-16">
-          <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">Last Night&apos;s Concerts</h2>
-            <p className="text-gray-600 mb-8 max-w-3xl">
+          <div className="card p-6 mb-8">
+            <h2 className="text-3xl font-bold mb-6 text-primary-100">Last Night&apos;s Concerts</h2>
+            <p className="text-primary-300 mb-8 max-w-3xl">
               Check out these amazing performances from yesterday. Our community has shared their favorite moments and photos from these unforgettable shows.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               {images.events.slice(0, 3).map((image) => (
-                <div key={image.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div key={image.id} className="card">
                   <div className="relative w-full h-48 overflow-hidden">
                     <Image 
                       src={image.src} 
@@ -57,8 +57,8 @@ export default function Home() {
                   </div>
                   <div className="p-4">
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-sm font-medium text-pink-600">42 fan photos</span>
-                      <span className="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Sold Out</span>
+                      <span className="text-sm font-medium text-accent-400">42 fan photos</span>
+                      <span className="badge">Sold Out</span>
                     </div>
                     <div className="flex -space-x-2 mb-4">
                       {[1, 2, 3, 4].map((i) => (
@@ -72,11 +72,11 @@ export default function Home() {
                           />
                         </div>
                       ))}
-                      <div className="w-8 h-8 rounded-full border-2 border-white bg-pink-500 flex items-center justify-center text-white text-xs">
+                      <div className="w-8 h-8 rounded-full border-2 border-primary-700 bg-accent-600 flex items-center justify-center text-white text-xs">
                         +38
                       </div>
                     </div>
-                    <button className="w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 transition-colors">
+                    <button className="btn-primary w-full">
                       View Gallery
                     </button>
                   </div>
@@ -85,17 +85,17 @@ export default function Home() {
             </div>
             
             <div className="text-center">
-              <button className="bg-white text-pink-600 font-bold py-2 px-6 rounded-full border border-pink-600 hover:bg-pink-50 transition-colors">
+              <button className="btn-secondary font-bold">
                 View All Recent Concerts
               </button>
             </div>
           </div>
           
           {/* Fan Contributions Collage */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <div className="card p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Top Fan Contributions</h2>
-              <a href="#" className="text-pink-600 hover:text-pink-700 font-medium">
+              <h2 className="text-2xl font-bold text-primary-100">Top Fan Contributions</h2>
+              <a href="#" className="text-accent-400 hover:text-accent-300 font-medium">
                 Submit Your Photos
               </a>
             </div>
@@ -112,7 +112,7 @@ export default function Home() {
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <button className="bg-pink-600 text-white py-1 px-3 rounded-full text-sm">
+                      <button className="bg-accent-600 text-white py-1 px-3 rounded-full text-sm hover:bg-accent-700 transition-colors">
                         View
                       </button>
                     </div>
