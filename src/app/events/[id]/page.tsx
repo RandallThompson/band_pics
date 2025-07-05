@@ -4,13 +4,12 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { getPastEvents } from '@/lib/database/models/event';
 import { getEventPhotos } from '@/lib/database/models/photo';
-import { PageProps } from 'next';
 
-type EventGalleryPageProps = PageProps<{
+type EventGalleryPageProps = {
   params: {
     id: string;
   };
-}>
+}
 
 export default async function EventGalleryPage({ params }: EventGalleryPageProps) {
   const eventId = params.id;

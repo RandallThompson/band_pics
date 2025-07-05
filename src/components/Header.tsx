@@ -116,7 +116,7 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
             />
             <button
               onClick={handleSearch}
-              className="px-4 py-3 bg-accent-600 text-white border-none rounded-r-md cursor-pointer hover:bg-accent-700 transition-colors"
+              className="px-4 py-3 bg-accent-500 text-white border-none rounded-r-md cursor-pointer hover:bg-accent-700 transition-colors"
             >
               Search
             </button>
@@ -132,7 +132,7 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
         <div className="bg-gradient-to-r from-accent-800 to-primary-800 p-8 rounded-lg text-center border border-primary-600">
           <h2 className="text-2xl font-bold mb-2 text-primary-100">Discover Buffalo&apos;s Music Scene</h2>
           <p className="text-lg mb-4 text-primary-200">From the Goo Goo Dolls to local venues - explore the city&apos;s rich musical heritage</p>
-          <button className="bg-accent-600 text-white font-bold py-2 px-6 rounded-full hover:bg-accent-700 transition-colors">
+          <button className="bg-accent-500 text-white font-bold py-2 px-6 rounded-full hover:bg-accent-700 transition-colors">
             Explore Buffalo Music
           </button>
         </div>

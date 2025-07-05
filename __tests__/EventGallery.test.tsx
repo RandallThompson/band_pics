@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import EventGalleryPage from '@/app/events/[id]/page';
 import * as eventModel from '@/lib/database/models/event';
 import * as photoModel from '@/lib/database/models/photo';
-import { PageProps } from 'next';
 
 // Mock the next/navigation module
 jest.mock('next/navigation', () => ({

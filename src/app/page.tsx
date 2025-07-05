@@ -100,7 +100,7 @@ export default function Home() {
                           />
                         </div>
                       ))}
-                      <div className="w-8 h-8 rounded-full border-2 border-primary-700 bg-accent-600 flex items-center justify-center text-white text-xs">
+                      <div className="w-8 h-8 rounded-full border-2 border-primary-700 bg-accent-500 flex items-center justify-center text-white text-xs">
                         +38
                       </div>
                     </div>
@@ -143,7 +143,7 @@ export default function Home() {
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <button className="bg-accent-600 text-white py-1 px-3 rounded-full text-sm hover:bg-accent-700 transition-colors">
+                      <button className="bg-accent-500 text-white py-1 px-3 rounded-full text-sm hover:bg-accent-700 transition-colors">
                         View
                       </button>
                     </div>
