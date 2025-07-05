@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import AuthModal from './AuthModal';
 
 interface HeaderProps {
@@ -13,13 +14,16 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
   const [searchTerm, setSearchTerm] = useState('');
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  const router = useRouter();
 
   const handleSearch = () => {
     if (searchTerm.trim() === '') {
       alert('Please enter a search term');
       return;
     }
-    onSearch(searchTerm.toLowerCase());
+    
+    // Navigate to the search page with the query parameter
+    router.push(`/search?q=${encodeURIComponent(searchTerm.toLowerCase())}`);
     setSearchTerm('');
   };
 

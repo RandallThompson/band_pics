@@ -3,7 +3,7 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { getPastEvents } from '@/lib/database/models/event';
-import { getEventPhotos } from '@/lib/database/models/photo';
+import { PhotoModel } from '@/lib/database/models/photo';
 import Button from '@/components/Button';
 
 export default async function EventGalleryPage({ params }) {
@@ -18,7 +18,8 @@ export default async function EventGalleryPage({ params }) {
   }
   
   // Fetch all photos for this event (both user-uploaded and social media)
-  const photos = await getEventPhotos(eventId);
+  const photoModel = new PhotoModel();
+  const photos = await photoModel.getMockEventPhotos(eventId);
   
   // Sort photos chronologically by timestamp
   const sortedPhotos = [...photos].sort((a, b) => 

@@ -17,7 +17,9 @@ jest.mock('@/lib/database/models/event', () => ({
 }));
 
 jest.mock('@/lib/database/models/photo', () => ({
-  getEventPhotos: jest.fn()
+  PhotoModel: jest.fn().mockImplementation(() => ({
+    getMockEventPhotos: jest.fn()
+  }))
 }));
 
 // Mock the next/image component
@@ -72,7 +74,10 @@ describe('EventGalleryPage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     (eventModel.getPastEvents as jest.Mock).mockResolvedValue([mockEvent]);
-    (photoModel.getEventPhotos as jest.Mock).mockResolvedValue(mockPhotos);
+    const mockPhotoModelInstance = (photoModel.PhotoModel as jest.Mock).mock.results[0]?.value;
+    if (mockPhotoModelInstance) {
+      (mockPhotoModelInstance.getMockEventPhotos as jest.Mock).mockResolvedValue(mockPhotos);
+    }
   });
 
   it('renders event details and photos', async () => {
@@ -107,7 +112,10 @@ describe('EventGalleryPage', () => {
   });
 
   it('displays a message when no photos are available', async () => {
-    (photoModel.getEventPhotos as jest.Mock).mockResolvedValue([]);
+    // Reset the mock and create a new instance for this test
+    (photoModel.PhotoModel as jest.Mock).mockImplementation(() => ({
+      getMockEventPhotos: jest.fn().mockResolvedValue([])
+    }));
     
     const page = await EventGalleryPage({ params: { id: '1' } });
     render(page);
