@@ -25,7 +25,7 @@ function initializeDatabase(): void {
   
   try {
     // Read and execute schema
-    const schemaPath = join(__dirname, 'schema.sql');
+    const schemaPath = join(process.cwd(), 'src/lib/database/schema.sql');
     const schema = readFileSync(schemaPath, 'utf8');
     
     // Split by semicolon and execute each statement
