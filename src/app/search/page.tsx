@@ -1,17 +1,13 @@
-'use client';
-
 import { Suspense } from 'react';
 import { SearchResults } from '@/components/SearchResults';
-import { useSearchParams } from 'next/navigation';
 
-export default function SearchPage() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get('q') || '';
+export default function SearchPage({ searchParams }: { searchParams: { q?: string } }) {
+  const query = searchParams.q || '';
   
   // Initialize with empty values
-  const events = [];
-  const error = null;
-
+  const events: any[] = [];
+  const error: string | null = null;
+  
   return (
     <div className="max-w-6xl mx-auto px-5 py-8">
       <h1 className="text-3xl font-bold mb-6 text-primary-100">
