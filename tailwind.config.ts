@@ -5,6 +5,16 @@ const config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'bg-blue-500',
+    'bg-blue-700',
+    'hover:bg-blue-700',
+    'text-blue-500',
+    'border-blue-500',
+    'bg-gray-700',
+    'bg-gray-800',
+    'border-gray-700',
+  ],
   theme: {
     extend: {
       colors: {

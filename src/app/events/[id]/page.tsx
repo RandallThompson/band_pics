@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { getPastEvents } from '@/lib/database/models/event';
 import { getEventPhotos } from '@/lib/database/models/photo';
+import Button from '@/components/Button';
 
 export default async function EventGalleryPage({ params }) {
   const eventId = params.id;
@@ -47,7 +48,7 @@ export default async function EventGalleryPage({ params }) {
                 <Image
                   src={photo.url}
                   alt={photo.caption || `Photo from ${event.title}`}
-                  fill="true"
+                  fill={true}
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
