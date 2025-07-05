@@ -4,12 +4,13 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { getPastEvents } from '@/lib/database/models/event';
 import { getEventPhotos } from '@/lib/database/models/photo';
+import { PageProps } from 'next';
 
-interface EventGalleryPageProps {
+type EventGalleryPageProps = PageProps<{
   params: {
     id: string;
   };
-}
+}>
 
 export default async function EventGalleryPage({ params }: EventGalleryPageProps) {
   const eventId = params.id;
@@ -53,7 +54,7 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
                 <Image
                   src={photo.url}
                   alt={photo.caption || `Photo from ${event.title}`}
-                  fill
+                  fill="true"
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
