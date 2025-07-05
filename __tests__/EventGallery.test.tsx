@@ -73,7 +73,7 @@ describe('EventGalleryPage', () => {
   });
 
   it('renders event details and photos', async () => {
-    const page = await EventGalleryPage({ params: { id: '1' } });
+    const page = await EventGalleryPage({ params: { id: '1' }, searchParams: {} });
     render(page);
 
     // Check event details
@@ -93,7 +93,7 @@ describe('EventGalleryPage', () => {
   });
 
   it('sorts photos chronologically by timestamp', async () => {
-    const page = await EventGalleryPage({ params: { id: '1' } });
+    const page = await EventGalleryPage({ params: { id: '1' }, searchParams: {} });
     render(page);
     
     // The photos should be sorted by timestamp (earliest first)
@@ -106,7 +106,7 @@ describe('EventGalleryPage', () => {
   it('displays a message when no photos are available', async () => {
     (photoModel.getEventPhotos as jest.Mock).mockResolvedValue([]);
     
-    const page = await EventGalleryPage({ params: { id: '1' } });
+    const page = await EventGalleryPage({ params: { id: '1' }, searchParams: {} });
     render(page);
     
     expect(screen.getByText('No photos available for this event yet.')).toBeInTheDocument();
