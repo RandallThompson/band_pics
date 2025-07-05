@@ -31,7 +31,7 @@ function convertToDbPost(post: any, eventId: string) {
 
 /**
  * GET handler for the cron job
- * This will be called by Vercel's cron scheduler
+ * This will be called by Vercel's cron scheduler once per day at midnight
  */
 export async function GET(request: NextRequest) {
   try {
