@@ -5,12 +5,7 @@ import Image from 'next/image';
 import { getPastEvents } from '@/lib/database/models/event';
 import { getEventPhotos } from '@/lib/database/models/photo';
 
-type Props = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-export default async function EventGalleryPage({ params }: Props) {
+export default async function EventGalleryPage({ params }: { params: { id: string } }) {
   const eventId = params.id;
   
   // Fetch event details

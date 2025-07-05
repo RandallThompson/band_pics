@@ -112,11 +112,11 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Search for artists, concerts, venues..."
-              className="p-3 w-full md:w-80 bg-primary-800 text-primary-100 border border-primary-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-accent-500"
+              className="p-3 w-full md:w-80 bg-gray-800 text-gray-100 border border-gray-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               onClick={handleSearch}
-              className="px-4 py-3 bg-accent-500 text-white border-none rounded-r-md cursor-pointer hover:bg-accent-700 transition-colors"
+              className="px-4 py-3 bg-blue-500 text-white border-none rounded-r-md cursor-pointer hover:bg-blue-700 transition-colors"
             >
               Search
             </button>
@@ -132,7 +132,7 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
         <div className="bg-gradient-to-r from-accent-800 to-primary-800 p-8 rounded-lg text-center border border-primary-600">
           <h2 className="text-2xl font-bold mb-2 text-primary-100">Discover Buffalo&apos;s Music Scene</h2>
           <p className="text-lg mb-4 text-primary-200">From the Goo Goo Dolls to local venues - explore the city&apos;s rich musical heritage</p>
-          <button className="bg-accent-500 text-white font-bold py-2 px-6 rounded-full hover:bg-accent-700 transition-colors">
+          <button className="bg-blue-500 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition-colors">
             Explore Buffalo Music
           </button>
         </div>

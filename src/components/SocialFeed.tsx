@@ -128,7 +128,7 @@ export default function SocialFeed() {
               onClick={() => setActiveVenue(venue)}
               className={`px-4 py-2 rounded-md text-sm ${
                 activeVenue === venue 
-                  ? 'bg-accent-500 text-white' 
+                  ? 'bg-blue-500 text-white' 
                   : 'bg-primary-700 text-primary-200 hover:bg-primary-600'
               }`}
             >
