@@ -109,3 +109,33 @@ export interface CreateCommentData {
 export interface UpdateCommentData {
   content: string;
 }
+
+export interface Photo {
+  id: number;
+  user_id: number;
+  event_id?: number;
+  blob_url: string;
+  caption?: string;
+  alt_text?: string;
+  genre?: string;
+  is_public: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CreatePhotoData {
+  user_id: number;
+  event_id?: number;
+  blob_url: string;
+  caption?: string;
+  alt_text?: string;
+  genre?: string;
+  is_public?: boolean;
+}
+
+export interface UpdatePhotoData {
+  caption?: string;
+  alt_text?: string;
+  genre?: string;
+  is_public?: boolean;
+}
