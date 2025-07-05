@@ -4,7 +4,7 @@ const nextConfig = {
     optimizePackageImports: ['@tailwindcss/postcss'],
   },
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'rest.bandsintown.com', 'via.placeholder.com', 'images.bandsintown.com'],
     unoptimized: true,
   },
 }
