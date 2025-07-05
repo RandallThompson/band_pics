@@ -112,13 +112,13 @@ export default function SocialFeed() {
     : posts.filter(post => post.venue === activeVenue);
 
   return (
-    <section id="social-feed" className="mb-8 p-5 bg-gray-50 rounded-md">
-      <h2 className="mb-4 pb-2 border-b border-gray-300 text-xl font-semibold">
+    <section id="social-feed" className="mb-8 p-5 card">
+      <h2 className="mb-4 pb-2 border-b border-primary-600 text-xl font-semibold text-primary-100">
         Buffalo Music Venue Social Feed
       </h2>
 
       <div className="mb-4">
-        <p className="text-sm text-gray-600 mb-3">
+        <p className="text-sm text-primary-300 mb-3">
           Filter by venue to see posts tagged at specific locations:
         </p>
         <div className="flex flex-wrap gap-2">
@@ -128,8 +128,8 @@ export default function SocialFeed() {
               onClick={() => setActiveVenue(venue)}
               className={`px-4 py-2 rounded-md text-sm ${
                 activeVenue === venue 
-                  ? 'bg-pink-600 text-white' 
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  ? 'bg-accent-600 text-white' 
+                  : 'bg-primary-700 text-primary-200 hover:bg-primary-600'
               }`}
             >
               {venue === 'all' ? 'All Venues' : venue}
@@ -140,26 +140,26 @@ export default function SocialFeed() {
 
       {loading && (
         <div className="text-center py-8">
-          <p>Loading social media posts...</p>
+          <p className="text-primary-300">Loading social media posts...</p>
         </div>
       )}
 
       {error && (
-        <div className="text-center py-8 text-red-500">
+        <div className="text-center py-8 text-red-400">
           <p>{error}</p>
         </div>
       )}
 
       {!loading && !error && filteredPosts.length === 0 && (
         <div className="text-center py-8">
-          <p>No posts found.</p>
+          <p className="text-primary-300">No posts found.</p>
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredPosts.map(post => (
-          <div key={post.id} className="border rounded-lg overflow-hidden bg-white shadow-sm">
-            <div className="p-3 bg-gray-100 flex items-center justify-between">
+          <div key={post.id} className="card">
+            <div className="p-3 bg-primary-700 flex items-center justify-between">
               <div className="flex items-center">
                 <div className="w-6 h-6 mr-2">
                   {post.platform === 'facebook' ? (
@@ -173,11 +173,11 @@ export default function SocialFeed() {
                   )}
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-medium">{post.author}</span>
-                  <span className="text-xs text-gray-500">at {post.venue}</span>
+                  <span className="font-medium text-primary-200">{post.author}</span>
+                  <span className="text-xs text-primary-400">at {post.venue}</span>
                 </div>
               </div>
-              <span className="text-xs text-gray-500">{post.date}</span>
+              <span className="text-xs text-primary-400">{post.date}</span>
             </div>
             
             <div className="relative w-full h-48">
@@ -191,12 +191,12 @@ export default function SocialFeed() {
             </div>
             
             <div className="p-4">
-              <p className="text-sm mb-2">{post.content}</p>
+              <p className="text-sm mb-2 text-primary-200">{post.content}</p>
               <a 
                 href={post.postUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-blue-600 hover:underline"
+                className="text-xs text-accent-400 hover:text-accent-300 hover:underline"
               >
                 View original post
               </a>

@@ -25,13 +25,13 @@ export default function Gallery({ title, id, images, searchTerm }: GalleryProps)
     : images;
 
   return (
-    <section id={id} className="mb-12 p-6 bg-white rounded-md shadow-sm">
+    <section id={id} className="mb-12 p-6 card">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">
+        <h2 className="text-2xl font-bold text-primary-100">
           {title}
         </h2>
         {id !== 'recent-concerts' && (
-          <a href={`#${id}`} className="text-pink-600 hover:text-pink-700 font-medium">
+          <a href={`#${id}`} className="text-accent-400 hover:text-accent-300 font-medium">
             View All {title}
           </a>
         )}
@@ -42,7 +42,7 @@ export default function Gallery({ title, id, images, searchTerm }: GalleryProps)
           filteredImages.map((image) => (
             <div 
               key={image.id} 
-              className="flex flex-col bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="flex flex-col card"
               style={{ display: searchTerm && !filteredImages.includes(image) ? 'none' : 'flex' }}
             >
               <div className="relative w-full h-48 overflow-hidden">
@@ -55,20 +55,20 @@ export default function Gallery({ title, id, images, searchTerm }: GalleryProps)
                 />
               </div>
               <div className="p-4">
-                <p className="text-lg font-bold text-gray-800 mb-1">
+                <p className="text-lg font-bold text-primary-100 mb-1">
                   {image.caption}
                 </p>
                 {id === 'recent-concerts' && (
                   <div className="mt-2">
-                    <p className="text-sm text-gray-600">July 3, 2025</p>
+                    <p className="text-sm text-primary-300">July 3, 2025</p>
                     <div className="flex items-center mt-2">
-                      <span className="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full mr-2">Fan Favorite</span>
-                      <span className="text-xs text-gray-500">42 contributions</span>
+                      <span className="badge mr-2">Fan Favorite</span>
+                      <span className="text-xs text-primary-400">42 contributions</span>
                     </div>
                   </div>
                 )}
                 {id !== 'recent-concerts' && (
-                  <button className="mt-3 w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 transition-colors">
+                  <button className="btn-primary mt-3 w-full">
                     View Details
                   </button>
                 )}
@@ -76,7 +76,7 @@ export default function Gallery({ title, id, images, searchTerm }: GalleryProps)
             </div>
           ))
         ) : (
-          <p className="col-span-full text-gray-600">
+          <p className="col-span-full text-primary-300">
             {searchTerm 
               ? `No results found for: ${searchTerm}` 
               : `No images yet. Add your ${title.toLowerCase()} pictures to the /${id} directory.`
