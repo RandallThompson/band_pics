@@ -19,5 +19,11 @@
       "source": "/api/bandsintown/:path*",
       "destination": "https://rest.bandsintown.com/:path*"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/social-media",
+      "schedule": "0 0 * * *"
+    }
   ]
 }

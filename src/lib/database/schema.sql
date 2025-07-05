@@ -64,6 +64,21 @@ CREATE TABLE IF NOT EXISTS post_comments (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- Photos table for storing user uploaded photos
+CREATE TABLE IF NOT EXISTS photos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    event_id INTEGER,
+    blob_url TEXT NOT NULL,
+    caption TEXT,
+    alt_text TEXT,
+    genre TEXT,
+    is_public BOOLEAN DEFAULT TRUE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 -- Indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
@@ -79,3 +94,7 @@ CREATE INDEX IF NOT EXISTS idx_post_likes_post_id ON post_likes(post_id);
 CREATE INDEX IF NOT EXISTS idx_post_likes_user_id ON post_likes(user_id);
 CREATE INDEX IF NOT EXISTS idx_post_comments_post_id ON post_comments(post_id);
 CREATE INDEX IF NOT EXISTS idx_post_comments_user_id ON post_comments(user_id);
+CREATE INDEX IF NOT EXISTS idx_photos_user_id ON photos(user_id);
+CREATE INDEX IF NOT EXISTS idx_photos_event_id ON photos(event_id);
+CREATE INDEX IF NOT EXISTS idx_photos_genre ON photos(genre);
+CREATE INDEX IF NOT EXISTS idx_photos_created_at ON photos(created_at);
