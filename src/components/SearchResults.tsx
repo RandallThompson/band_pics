@@ -19,7 +19,7 @@ export function SearchResults({ query, events, error }: SearchResultsProps) {
           Enter an artist name in the search box above to find upcoming events
         </h2>
         <p className="text-primary-400 mb-6">
-          Search for your favorite artists to discover when they're playing near you
+          Search for your favorite artists to discover when they&apos;re playing near you
         </p>
         <Link 
           href="/"
@@ -51,7 +51,7 @@ export function SearchResults({ query, events, error }: SearchResultsProps) {
     return (
       <div className="text-center py-8 card">
         <h2 className="text-xl font-semibold mb-4 text-primary-200">
-          No events found for "{query}"
+          No events found for &quot;{query}&quot;
         </h2>
         <p className="text-primary-400 mb-6">
           Try searching for a different artist or check back later
@@ -90,7 +90,7 @@ export function SearchResults({ query, events, error }: SearchResultsProps) {
   return (
     <div>
       <p className="mb-6 text-primary-300">
-        Found {events.length} upcoming events for "{query}"
+        Found {events.length} upcoming events for &quot;{query}&quot;
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
