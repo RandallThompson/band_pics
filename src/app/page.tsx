@@ -7,10 +7,12 @@ import Gallery from '@/components/Gallery';
 import Footer from '@/components/Footer';
 import SocialFeed from '@/components/SocialFeed';
 import UpcomingEvents from '@/components/UpcomingEvents';
+import PastEvents from '@/components/PastEvents';
 import { useImages } from '@/hooks/useImages';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [showPastEvents, setShowPastEvents] = useState<boolean>(false);
   const images = useImages();
 
   const handleSearch = (term: string) => {
@@ -21,16 +23,42 @@ export default function Home() {
     setSearchTerm('');
   };
 
+  const handleShowPastEvents = () => {
+    setShowPastEvents(true);
+  };
+
+  const handleBackToMain = () => {
+    setShowPastEvents(false);
+  };
+
   return (
     <div className="font-sans leading-relaxed text-primary-100 min-h-screen">
-      <Header onSearch={handleSearch} onReset={handleReset} />
+      <Header 
+        onSearch={handleSearch} 
+        onReset={handleReset} 
+        onShowPastEvents={handleShowPastEvents}
+      />
       
       <main className="max-w-6xl mx-auto px-5">
-        {/* New component for upcoming events in Buffalo */}
-        <UpcomingEvents />
-        
-        {/* Recent Concerts Section */}
-        <section id="recent-concerts" className="mb-16">
+        {showPastEvents ? (
+          <div>
+            <div className="mb-6">
+              <button
+                onClick={handleBackToMain}
+                className="bg-primary-700 text-primary-100 py-2 px-4 rounded-md hover:bg-primary-600 transition-colors"
+              >
+                ← Back to Main
+              </button>
+            </div>
+            <PastEvents />
+          </div>
+        ) : (
+          <>
+            {/* New component for upcoming events in Buffalo */}
+            <UpcomingEvents />
+            
+            {/* Recent Concerts Section */}
+            <section id="recent-concerts" className="mb-16">
           <div className="card p-6 mb-8">
             <h2 className="text-3xl font-bold mb-6 text-primary-100">Last Night&apos;s Concerts</h2>
             <p className="text-primary-300 mb-8 max-w-3xl">
@@ -85,7 +113,10 @@ export default function Home() {
             </div>
             
             <div className="text-center">
-              <button className="btn-secondary font-bold">
+              <button 
+                onClick={handleShowPastEvents}
+                className="btn-secondary font-bold"
+              >
                 View All Recent Concerts
               </button>
             </div>
@@ -123,34 +154,10 @@ export default function Home() {
           </div>
         </section>
         
-        {/* Regular Genre Sections */}
-        <Gallery 
-          title="Rock Bands" 
-          id="rock" 
-          images={images.rock} 
-          searchTerm={searchTerm}
-        />
-        <Gallery 
-          title="Jazz Bands" 
-          id="jazz" 
-          images={images.jazz} 
-          searchTerm={searchTerm}
-        />
-        <Gallery 
-          title="Pop Bands" 
-          id="pop" 
-          images={images.pop} 
-          searchTerm={searchTerm}
-        />
-        <Gallery 
-          title="Events" 
-          id="events" 
-          images={images.events} 
-          searchTerm={searchTerm}
-        />
-        
         {/* Social Media Feed Section */}
         <SocialFeed />
+        </>
+        )}
       </main>
 
       <Footer />

@@ -11,13 +11,14 @@ interface SocialPost {
   postUrl: string;
   date: string;
   author: string;
+  venue: string;
 }
 
 export default function SocialFeed() {
   const [posts, setPosts] = useState<SocialPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'all' | 'facebook' | 'instagram'>('all');
+  const [activeVenue, setActiveVenue] = useState<string>('all');
 
   useEffect(() => {
     // In a real application, this would fetch from an actual API
@@ -26,43 +27,67 @@ export default function SocialFeed() {
       setLoading(true);
       
       try {
-        // Mock data for demonstration
+        // Mock data for demonstration with venue-specific posts
         const mockPosts: SocialPost[] = [
           {
             id: 'fb1',
             platform: 'facebook',
-            content: 'Amazing show tonight at Buffalo Music Hall! #livemusic #buffalo',
-            imageUrl: 'https://via.placeholder.com/400x300?text=Buffalo+Music+Hall+Event',
+            content: 'Amazing show tonight at Buffalo Iron Works! #livemusic #buffalo',
+            imageUrl: 'https://via.placeholder.com/400x300?text=Buffalo+Iron+Works+Event',
             postUrl: 'https://facebook.com/post/1',
             date: '2025-07-03',
-            author: 'Buffalo Music Lovers'
+            author: 'Buffalo Music Lovers',
+            venue: 'Buffalo Iron Works'
           },
           {
             id: 'ig1',
             platform: 'instagram',
-            content: 'Incredible performance at @BuffaloMusicVenue last night! #musicscene',
-            imageUrl: 'https://via.placeholder.com/400x400?text=Live+Performance',
+            content: 'Incredible performance at @TownBallroom last night! #musicscene',
+            imageUrl: 'https://via.placeholder.com/400x400?text=Town+Ballroom+Performance',
             postUrl: 'https://instagram.com/p/1',
             date: '2025-07-02',
-            author: '@music_photographer'
+            author: '@music_photographer',
+            venue: 'Town Ballroom'
           },
           {
             id: 'fb2',
             platform: 'facebook',
-            content: 'Don\'t miss our upcoming show at Buffalo Music Hall this weekend! #buffalony',
-            imageUrl: 'https://via.placeholder.com/400x300?text=Upcoming+Show',
+            content: 'Don\'t miss our upcoming show at Mohawk Place this weekend! #buffalony',
+            imageUrl: 'https://via.placeholder.com/400x300?text=Mohawk+Place+Show',
             postUrl: 'https://facebook.com/post/2',
             date: '2025-07-01',
-            author: 'Local Band'
+            author: 'Local Band',
+            venue: 'Mohawk Place'
           },
           {
             id: 'ig2',
             platform: 'instagram',
-            content: 'Great crowd tonight at @BuffaloMusicVenue! Thanks for coming out! #livemusic',
-            imageUrl: 'https://via.placeholder.com/400x400?text=Crowd+Shot',
+            content: 'Great crowd tonight at @SportsmensTavern! Thanks for coming out! #livemusic',
+            imageUrl: 'https://via.placeholder.com/400x400?text=Sportsmens+Tavern+Crowd',
             postUrl: 'https://instagram.com/p/2',
             date: '2025-06-30',
-            author: '@venue_official'
+            author: '@venue_official',
+            venue: 'Sportsmen\'s Tavern'
+          },
+          {
+            id: 'fb3',
+            platform: 'facebook',
+            content: 'Beautiful classical performance at Kleinhans Music Hall tonight! #classical #buffalo',
+            imageUrl: 'https://via.placeholder.com/400x300?text=Kleinhans+Classical',
+            postUrl: 'https://facebook.com/post/3',
+            date: '2025-06-29',
+            author: 'Classical Music Buffalo',
+            venue: 'Kleinhans Music Hall'
+          },
+          {
+            id: 'ig3',
+            platform: 'instagram',
+            content: 'Another epic night at @BuffaloIronWorks! The energy was incredible! 🔥',
+            imageUrl: 'https://via.placeholder.com/400x400?text=Iron+Works+Epic+Night',
+            postUrl: 'https://instagram.com/p/3',
+            date: '2025-06-28',
+            author: '@concert_fan_buffalo',
+            venue: 'Buffalo Iron Works'
           }
         ];
         
@@ -79,9 +104,12 @@ export default function SocialFeed() {
     fetchSocialPosts();
   }, []);
 
-  const filteredPosts = activeTab === 'all' 
+  // Get unique venues for filtering
+  const venues = ['all', ...Array.from(new Set(posts.map(post => post.venue)))];
+  
+  const filteredPosts = activeVenue === 'all' 
     ? posts 
-    : posts.filter(post => post.platform === activeTab);
+    : posts.filter(post => post.venue === activeVenue);
 
   return (
     <section id="social-feed" className="mb-8 p-5 card">
@@ -89,25 +117,25 @@ export default function SocialFeed() {
         Buffalo Music Venue Social Feed
       </h2>
 
-      <div className="mb-4 flex space-x-2">
-        <button 
-          onClick={() => setActiveTab('all')}
-          className={`px-4 py-2 rounded-md ${activeTab === 'all' ? 'bg-accent-600 text-white' : 'bg-primary-700 text-primary-200'}`}
-        >
-          All
-        </button>
-        <button 
-          onClick={() => setActiveTab('facebook')}
-          className={`px-4 py-2 rounded-md ${activeTab === 'facebook' ? 'bg-accent-600 text-white' : 'bg-primary-700 text-primary-200'}`}
-        >
-          Facebook
-        </button>
-        <button 
-          onClick={() => setActiveTab('instagram')}
-          className={`px-4 py-2 rounded-md ${activeTab === 'instagram' ? 'bg-accent-600 text-white' : 'bg-primary-700 text-primary-200'}`}
-        >
-          Instagram
-        </button>
+      <div className="mb-4">
+        <p className="text-sm text-primary-300 mb-3">
+          Filter by venue to see posts tagged at specific locations:
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {venues.map((venue) => (
+            <button 
+              key={venue}
+              onClick={() => setActiveVenue(venue)}
+              className={`px-4 py-2 rounded-md text-sm ${
+                activeVenue === venue 
+                  ? 'bg-accent-600 text-white' 
+                  : 'bg-primary-700 text-primary-200 hover:bg-primary-600'
+              }`}
+            >
+              {venue === 'all' ? 'All Venues' : venue}
+            </button>
+          ))}
+        </div>
       </div>
 
       {loading && (
@@ -144,7 +172,10 @@ export default function SocialFeed() {
                     </svg>
                   )}
                 </div>
-                <span className="font-medium text-primary-200">{post.author}</span>
+                <div className="flex flex-col">
+                  <span className="font-medium text-primary-200">{post.author}</span>
+                  <span className="text-xs text-primary-400">at {post.venue}</span>
+                </div>
               </div>
               <span className="text-xs text-primary-400">{post.date}</span>
             </div>

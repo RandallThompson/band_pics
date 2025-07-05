@@ -1,14 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import AuthModal from './AuthModal';
 
 interface HeaderProps {
   onSearch: (searchTerm: string) => void;
   onReset: () => void;
+  onShowPastEvents: () => void;
 }
 
-export default function Header({ onSearch, onReset }: HeaderProps) {
+export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderProps) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
 
   const handleSearch = () => {
     if (searchTerm.trim() === '') {
@@ -30,6 +34,11 @@ export default function Header({ onSearch, onReset }: HeaderProps) {
     onReset();
   };
 
+  const handleAuthClick = (mode: 'login' | 'signup') => {
+    setAuthMode(mode);
+    setAuthModalOpen(true);
+  };
+
   return (
     <header className="bg-primary-900/90 backdrop-blur-sm text-white p-5 mb-5 border-b border-primary-700">
       <div className="max-w-6xl mx-auto">
@@ -37,12 +46,18 @@ export default function Header({ onSearch, onReset }: HeaderProps) {
           <h1 className="text-3xl font-bold text-accent-400">Buffalo Music Scene</h1>
           
           <div className="flex items-center space-x-4">
-            <a href="#" className="text-primary-200 hover:text-accent-400 transition-colors">
+            <button 
+              onClick={() => handleAuthClick('signup')}
+              className="text-primary-200 hover:text-accent-400 transition-colors"
+            >
               Sign Up
-            </a>
-            <a href="#" className="text-primary-200 hover:text-accent-400 transition-colors">
+            </button>
+            <button 
+              onClick={() => handleAuthClick('login')}
+              className="text-primary-200 hover:text-accent-400 transition-colors"
+            >
               Log In
-            </a>
+            </button>
           </div>
         </div>
         
@@ -75,9 +90,12 @@ export default function Header({ onSearch, onReset }: HeaderProps) {
                 </a>
               </li>
               <li>
-                <a href="#recent-concerts" className="text-primary-200 font-medium hover:text-accent-400 transition-colors no-underline">
+                <button 
+                  onClick={onShowPastEvents}
+                  className="text-primary-200 font-medium hover:text-accent-400 transition-colors no-underline"
+                >
                   Recent Concerts
-                </a>
+                </button>
               </li>
               <li>
                 <a href="#social-feed" className="text-primary-200 font-medium hover:text-accent-400 transition-colors no-underline">
@@ -119,6 +137,12 @@ export default function Header({ onSearch, onReset }: HeaderProps) {
           </button>
         </div>
       </div>
+      
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        mode={authMode}
+      />
     </header>
   );
 }
