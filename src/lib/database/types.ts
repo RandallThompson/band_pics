@@ -123,6 +123,44 @@ export interface Photo {
   updated_at: string;
 }
 
+export interface Venue {
+  id: number;
+  name: string;
+  location?: string | null;
+  website?: string | null;
+  created_at: string;
+}
+
+export interface CreateVenueData {
+  name: string;
+  location?: string;
+  website?: string;
+}
+
+export interface Event {
+  id: number;
+  venue_id: number;
+  title: string;
+  date: string;
+  image_url?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CreateEventData {
+  venue_id: number;
+  title: string;
+  date: string;
+  image_url?: string;
+}
+
+export interface UpdateEventData {
+  venue_id?: number;
+  title?: string;
+  date?: string;
+  image_url?: string;
+}
+
 export interface CreatePhotoData {
   user_id: number;
   event_id?: number;

@@ -1,84 +1,96 @@
 import { getDatabase } from '../connection';
 
 export interface Event {
-  id: string;
+  id: number;
+  venue_id: number;
   title: string;
   date: string;
-  venue: string;
-  imageUrl: string;
-  photoCount: number;
+  image_url?: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
-// Get all past events
-export async function getPastEvents(): Promise<Event[]> {
-  try {
-    // In a real application, this would query the database
-    // For now, we'll return mock data
-    const pastEvents: Event[] = [
-      {
-        id: '1',
-        title: 'Rock Night at Buffalo Iron Works',
-        date: '2025-07-02',
-        venue: 'Buffalo Iron Works',
-        imageUrl: 'https://via.placeholder.com/300x200?text=Rock+Night',
-        photoCount: 42
-      },
-      {
-        id: '2',
-        title: 'Jazz Evening at Town Ballroom',
-        date: '2025-07-01',
-        venue: 'Town Ballroom',
-        imageUrl: 'https://via.placeholder.com/300x200?text=Jazz+Evening',
-        photoCount: 28
-      },
-      {
-        id: '3',
-        title: 'Pop Concert at Mohawk Place',
-        date: '2025-06-30',
-        venue: 'Mohawk Place',
-        imageUrl: 'https://via.placeholder.com/300x200?text=Pop+Concert',
-        photoCount: 67
-      },
-      {
-        id: '4',
-        title: 'Blues Night at Sportsmen\'s Tavern',
-        date: '2025-06-29',
-        venue: 'Sportsmen\'s Tavern',
-        imageUrl: 'https://via.placeholder.com/300x200?text=Blues+Night',
-        photoCount: 35
-      },
-      {
-        id: '5',
-        title: 'Classical Performance at Kleinhans Music Hall',
-        date: '2025-06-28',
-        venue: 'Kleinhans Music Hall',
-        imageUrl: 'https://via.placeholder.com/300x200?text=Classical+Performance',
-        photoCount: 19
-      },
-      {
-        id: '6',
-        title: 'Indie Rock Show at Buffalo Iron Works',
-        date: '2025-06-27',
-        venue: 'Buffalo Iron Works',
-        imageUrl: 'https://via.placeholder.com/300x200?text=Indie+Rock',
-        photoCount: 53
+export interface CreateEventData {
+  venue_id: number;
+  title: string;
+  date: string;
+  image_url?: string;
+}
+
+export interface UpdateEventData {
+  venue_id?: number;
+  title?: string;
+  date?: string;
+  image_url?: string;
+}
+
+export class EventModel {
+  private db = getDatabase();
+
+  createEvent(data: CreateEventData): Event {
+    const stmt = this.db.prepare(
+      `INSERT INTO events (venue_id, title, date, image_url) VALUES (?, ?, ?, ?)`
+    );
+    const result = stmt.run(
+      data.venue_id,
+      data.title,
+      data.date,
+      data.image_url || null
+    );
+    const event = this.getEventById(result.lastInsertRowid as number);
+    if (!event) throw new Error('Failed to create event');
+    return event;
+  }
+
+  getEventById(id: number): Event | null {
+    const stmt = this.db.prepare('SELECT * FROM events WHERE id = ?');
+    return stmt.get(id) as Event | null;
+  }
+
+  getEvents(limit: number = 50, offset: number = 0): Event[] {
+    const stmt = this.db.prepare(
+      'SELECT * FROM events ORDER BY date DESC LIMIT ? OFFSET ?'
+    );
+    return stmt.all(limit, offset) as Event[];
+  }
+
+  getEventsByVenue(venueId: number, limit: number = 50, offset: number = 0): Event[] {
+    const stmt = this.db.prepare(
+      'SELECT * FROM events WHERE venue_id = ? ORDER BY date DESC LIMIT ? OFFSET ?'
+    );
+    return stmt.all(venueId, limit, offset) as Event[];
+  }
+
+  updateEvent(id: number, data: UpdateEventData): Event | null {
+    const updates: string[] = [];
+    const values: any[] = [];
+    Object.entries(data).forEach(([key, value]) => {
+      if (value !== undefined) {
+        updates.push(`${key} = ?`);
+        values.push(value);
       }
-    ];
-    
-    return pastEvents;
-  } catch (error) {
-    console.error('Error fetching past events:', error);
-    throw new Error('Failed to fetch past events');
+    });
+    if (updates.length === 0) return this.getEventById(id);
+    updates.push('updated_at = CURRENT_TIMESTAMP');
+    values.push(id);
+    const stmt = this.db.prepare(`UPDATE events SET ${updates.join(', ')} WHERE id = ?`);
+    stmt.run(...values);
+    return this.getEventById(id);
+  }
+
+  deleteEvent(id: number): boolean {
+    const stmt = this.db.prepare('DELETE FROM events WHERE id = ?');
+    const result = stmt.run(id);
+    return result.changes > 0;
   }
 }
 
-// Get a single event by ID
+export async function getPastEvents(): Promise<Event[]> {
+  const model = new EventModel();
+  return model.getEvents();
+}
+
 export async function getEventById(id: string): Promise<Event | null> {
-  try {
-    const events = await getPastEvents();
-    return events.find(event => event.id === id) || null;
-  } catch (error) {
-    console.error(`Error fetching event with ID ${id}:`, error);
-    throw new Error(`Failed to fetch event with ID ${id}`);
-  }
+  const model = new EventModel();
+  return model.getEventById(Number(id));
 }

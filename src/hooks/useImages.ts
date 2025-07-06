@@ -13,6 +13,7 @@ export interface GenreImages {
   rock: ImageData[];
   jazz: ImageData[];
   pop: ImageData[];
+  folk: ImageData[];
   events: ImageData[];
 }
 
@@ -21,25 +22,27 @@ export function useImages() {
     rock: [],
     jazz: [],
     pop: [],
+    folk: [],
     events: []
   });
 
   useEffect(() => {
-    // Simulate loading images - in a real app, this would fetch from an API
+    // Load images from the local public/images directory
     const loadImages = () => {
-      const genres = ['rock', 'jazz', 'pop', 'events'] as const;
+      const genres = ['rock', 'jazz', 'pop', 'folk', 'events'] as const;
       const newImages: GenreImages = {
         rock: [],
         jazz: [],
         pop: [],
+        folk: [],
         events: []
       };
 
-      genres.forEach(genre => {
+      genres.forEach((genre) => {
         for (let i = 1; i <= 4; i++) {
           newImages[genre].push({
             id: i,
-            src: `https://via.placeholder.com/300x200?text=${genre.charAt(0).toUpperCase() + genre.slice(1)}+Band+${i}`,
+            src: `/images/${genre}/${genre}${i}.svg`,
             alt: `${genre} band ${i}`,
             caption: `${genre.charAt(0).toUpperCase() + genre.slice(1)} Band ${i}`
           });
