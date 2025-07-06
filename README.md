@@ -135,7 +135,7 @@ The application includes tests for:
 ### Adding New Genres
 1. Update the `GenreImages` interface in `src/hooks/useImages.ts`
 2. Add new navigation links in `src/components/Header.tsx`
-3. Add new Gallery components in `src/app/page.tsx`
+3. Add new Gallery components or pages such as `src/app/folk/page.tsx`
 
 ### Search Enhancement
 - Modify search logic in `src/components/Header.tsx`

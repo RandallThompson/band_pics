@@ -17,6 +17,9 @@ const config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'Poppins', 'ui-sans-serif', 'system-ui'],
+      },
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',

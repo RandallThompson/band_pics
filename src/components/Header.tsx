@@ -100,6 +100,11 @@ export default function Header({ onSearch, onReset, onShowPastEvents }: HeaderPr
                 </a>
               </li>
               <li>
+                <a href="#folk" className="text-primary-200 font-medium hover:text-accent-400 transition-colors no-underline">
+                  Folk
+                </a>
+              </li>
+              <li>
                 <a href="#events" className="text-primary-200 font-medium hover:text-accent-400 transition-colors no-underline">
                   Events
                 </a>
