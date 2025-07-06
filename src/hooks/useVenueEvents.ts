@@ -39,7 +39,7 @@ export function useVenueEvents() {
           id: e.id.toString(),
           title: e.title,
           date: e.date,
-          venue: VENUE_SOURCES.find(v => v.name === e.venue)?.name || e.venue_id,
+          venue: e.venue,
           ticketUrl: '',
           imageUrl: e.image_url || '/images/events/events1.svg',
           source: 'Local Database'

@@ -10,6 +10,10 @@ export interface Event {
   updated_at: string;
 }
 
+export interface EventWithVenue extends Event {
+  venue: string;
+}
+
 export interface CreateEventData {
   venue_id: number;
   title: string;
@@ -47,11 +51,25 @@ export class EventModel {
     return stmt.get(id) as Event | null;
   }
 
+  getEventWithVenue(id: number): EventWithVenue | null {
+    const stmt = this.db.prepare(
+      `SELECT e.*, v.name AS venue FROM events e JOIN venues v ON e.venue_id = v.id WHERE e.id = ?`
+    );
+    return stmt.get(id) as EventWithVenue | null;
+  }
+
   getEvents(limit: number = 50, offset: number = 0): Event[] {
     const stmt = this.db.prepare(
       'SELECT * FROM events ORDER BY date DESC LIMIT ? OFFSET ?'
     );
     return stmt.all(limit, offset) as Event[];
+  }
+
+  getEventsWithVenues(limit: number = 50, offset: number = 0): EventWithVenue[] {
+    const stmt = this.db.prepare(
+      `SELECT e.*, v.name AS venue FROM events e JOIN venues v ON e.venue_id = v.id ORDER BY date DESC LIMIT ? OFFSET ?`
+    );
+    return stmt.all(limit, offset) as EventWithVenue[];
   }
 
   getEventsByVenue(venueId: number, limit: number = 50, offset: number = 0): Event[] {
@@ -85,12 +103,12 @@ export class EventModel {
   }
 }
 
-export async function getPastEvents(): Promise<Event[]> {
+export async function getPastEvents(limit: number = 50, offset: number = 0): Promise<EventWithVenue[]> {
   const model = new EventModel();
-  return model.getEvents();
+  return model.getEventsWithVenues(limit, offset);
 }
 
-export async function getEventById(id: string): Promise<Event | null> {
+export async function getEventById(id: string): Promise<EventWithVenue | null> {
   const model = new EventModel();
-  return model.getEventById(Number(id));
+  return model.getEventWithVenue(Number(id));
 }

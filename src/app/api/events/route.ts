@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '50');
     const offset = parseInt(searchParams.get('offset') || '0');
-    const events = eventModel.getEvents(limit, offset);
+    const events = eventModel.getEventsWithVenues(limit, offset);
     return NextResponse.json({ events, limit, offset });
   } catch (error) {
     console.error('Error fetching events:', error);

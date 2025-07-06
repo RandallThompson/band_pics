@@ -161,6 +161,10 @@ export interface UpdateEventData {
   image_url?: string;
 }
 
+export interface EventWithVenue extends Event {
+  venue: string;
+}
+
 export interface CreatePhotoData {
   user_id: number;
   event_id?: number;

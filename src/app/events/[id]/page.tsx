@@ -8,10 +8,10 @@ import Button from '@/components/Button';
 
 export default async function EventGalleryPage({ params }) {
   const eventId = params.id;
-  
+
   // Fetch event details
   const events = await getPastEvents();
-  const event = events.find(e => e.id === eventId);
+  const event = events.find(e => e.id === Number(eventId));
   
   if (!event) {
     return notFound();
