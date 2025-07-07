@@ -1,9 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@reference theme(colors);
-@reference theme(colors.blue);
-@reference theme(colors.gray);
 
 * {
   margin: 0;
